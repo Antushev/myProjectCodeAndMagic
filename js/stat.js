@@ -4,12 +4,12 @@ var WIDTH_RECT = 420;
 var HEIGHT_RECT = 270;
 var START_X_RECT = 100;
 var START_Y_RECT = 10;
-var START_X_SHADOW  110;
+var START_X_SHADOW = 110;
 var START_Y_SHADOW = 20;
 
 var START_X_COLUMN = 120;
 var START_Y_COLUMN = 240;
-var WIDTH_COLUMN  = 40;
+var WIDTH_COLUMN = 40;
 var MAX_HEIGHT_COLUMN = 150;
 var GAP_COLUMN = 50;
 
@@ -25,7 +25,7 @@ var renderRectStatistic = function (ctx, x, y, rectWidth, rectHeight, color) {
   ctx.fillRect(x, y, rectWidth, rectHeight);
 };
 
-var maxTime = function (timesArray) {
+var findMaxTime = function (timesArray) {
   var maxTime = timesArray[0];
   for (var i = 0; i < timesArray.length; i++) {
     if (timesArray[i] > maxTime) {
@@ -36,7 +36,7 @@ var maxTime = function (timesArray) {
 };
 
 window.renderStatistics = function (ctx, names, times) {
-  renderRectStatistic(ctx,START_X_SHADOW, START_Y_SHADOW, WIDTH_RECT, HEIGHT_RECT, 'rgba(0, 0, 0, 1)');
+  renderRectStatistic(ctx, START_X_SHADOW, START_Y_SHADOW, WIDTH_RECT, HEIGHT_RECT, 'rgba(0, 0, 0, 1)');
   renderRectStatistic(ctx, START_X_RECT, START_Y_RECT, WIDTH_RECT, HEIGHT_RECT, '#fff');
 
   ctx.fillStyle = '#000';
@@ -44,10 +44,10 @@ window.renderStatistics = function (ctx, names, times) {
   ctx.fillText('Ура вы победили!', 120, 40);
   ctx.fillText('Список результатов:', 120, 60);
 
-  maxTimeInArray = maxTime(times);
+  maxTimeInArray = findMaxTime(times);
 
   for (var i = 0; i < names.length; i++) {
-    if (names[i] != 'Вы') {
+    if (names[i] !== 'Вы') {
       colorColumnPlayer = 'hsl(250' + ', ' + Math.floor(Math.random() * 100) + '%,  50%)';
     } else {
       colorColumnPlayer = 'rgba(255, 0, 0, 1)';
