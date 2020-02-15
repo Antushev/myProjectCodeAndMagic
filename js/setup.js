@@ -47,6 +47,14 @@ var EYES_COLORS = [
   'green'
 ];
 
+var FIREBALL_COLORS = [
+  '#ee4830',
+  '#30a8ee',
+  '#5ce6c0',
+  '#e848d5',
+  '#e6e848'
+];
+
 var getRandomNumber = function (maxNumber) {
   return Math.ceil(Math.random() * maxNumber);
 };
@@ -95,4 +103,73 @@ var wizards = generateWizards();
 similarList.appendChild(renderWizards(wizards));
 
 document.querySelector('.setup-similar').classList.remove('hidden');
-document.querySelector('.setup').classList.remove('hidden');
+
+// Учебный проект: одеть Надежду
+
+var setupWindow = document.querySelector('.setup');
+var setupOpen = document.querySelector('.setup-open');
+var setupClose = document.querySelector('.setup-close');
+
+var openSetup = function () {
+  setupWindow.classList.remove('hidden');
+  document.addEventListener('keydown', onSetupDownEscape);
+};
+
+var closeSetup = function () {
+  setupWindow.classList.add('hidden');
+  document.removeEventListener('keydown', onSetupDownEscape);
+};
+
+var onSetupDownEscape = function (evt) {
+  if (evt.key === 'Escape') {
+    closeSetup();
+  }
+};
+
+setupOpen.addEventListener('click', function () {
+  openSetup();
+});
+
+setupOpen.addEventListener('keydown', function (evt) {
+  if (evt.key === 'Enter') {
+    openSetup();
+  }
+});
+
+setupClose.addEventListener('click', function () {
+  closeSetup();
+});
+
+setupClose.addEventListener('keydown', function (evt) {
+  if (evt.key === 'Enter') {
+    closeSetup();
+  }
+});
+
+var wizardCoat = document.querySelector('.setup-wizard .wizard-coat');
+var wizardEyes = document.querySelector('.setup-wizard .wizard-eyes');
+var wizardFireball = document.querySelector('.setup-fireball-wrap');
+
+var changeColorElementWizard = function (colors, element) {
+  element.style.fill = colors[getRandomNumber(colors.length - 1)];
+};
+
+var changeBackgroundFireballWizard = function (backgrounds) {
+  var fireball = document.querySelector('.setup-fireball-wrap');
+  var color = backgrounds[getRandomNumber(backgrounds.length - 1)];
+
+  fireball.style.backgroundColor = color;
+  fireball.querySelector('input[name="fireball-color"]').value = color;
+};
+
+wizardCoat.addEventListener('click', function () {
+  changeColorElementWizard(COAT_COLORS, wizardCoat);
+});
+
+wizardEyes.addEventListener('click', function () {
+  changeColorElementWizard(EYES_COLORS, wizardEyes);
+});
+
+wizardFireball.addEventListener('click', function () {
+  changeBackgroundFireballWizard(FIREBALL_COLORS);
+});
