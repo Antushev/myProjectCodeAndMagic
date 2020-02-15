@@ -7,6 +7,8 @@ var wizardTemplate = document.querySelector('#similar-wizard-template')
 var similarList = document.querySelector('.setup-similar-list');
 
 var NUMBER_WIZARD = 4;
+var ESCAPE_KEY = 'Escape';
+var ENTER_KEY = 'Enter';
 
 var FIRST_NAMES = [
   'Иван',
@@ -121,7 +123,7 @@ var closeSetup = function () {
 };
 
 var onSetupDownEscape = function (evt) {
-  if (evt.key === 'Escape') {
+  if (evt.key === ESCAPE_KEY) {
     closeSetup();
   }
 };
@@ -131,7 +133,7 @@ setupOpen.addEventListener('click', function () {
 });
 
 setupOpen.addEventListener('keydown', function (evt) {
-  if (evt.key === 'Enter') {
+  if (evt.key === ENTER_KEY) {
     openSetup();
   }
 });
@@ -141,33 +143,37 @@ setupClose.addEventListener('click', function () {
 });
 
 setupClose.addEventListener('keydown', function (evt) {
-  if (evt.key === 'Enter') {
+  if (evt.key === ENTER_KEY) {
     closeSetup();
   }
 });
 
 var wizardCoat = document.querySelector('.setup-wizard .wizard-coat');
+var wizardCoatInput = document.querySelector('input[name="coat-color"]');
 var wizardEyes = document.querySelector('.setup-wizard .wizard-eyes');
+var wizardEyesInput = document.querySelector('input[name="eyes-color"]');
 var wizardFireball = document.querySelector('.setup-fireball-wrap');
 
-var changeColorElementWizard = function (colors, element) {
-  element.style.fill = colors[getRandomNumber(colors.length - 1)];
+var changeColorElementWizard = function (colors, element, inputElement) {
+  var color = getRandomElementFromArray(colors);
+  element.style.fill = color;
+  inputElement.value = color;
 };
 
 var changeBackgroundFireballWizard = function (backgrounds) {
   var fireball = document.querySelector('.setup-fireball-wrap');
-  var color = backgrounds[getRandomNumber(backgrounds.length - 1)];
+  var color = getRandomElementFromArray(backgrounds);
 
   fireball.style.backgroundColor = color;
   fireball.querySelector('input[name="fireball-color"]').value = color;
 };
 
 wizardCoat.addEventListener('click', function () {
-  changeColorElementWizard(COAT_COLORS, wizardCoat);
+  changeColorElementWizard(COAT_COLORS, wizardCoat, wizardCoatInput);
 });
 
 wizardEyes.addEventListener('click', function () {
-  changeColorElementWizard(EYES_COLORS, wizardEyes);
+  changeColorElementWizard(EYES_COLORS, wizardEyes, wizardEyesInput);
 });
 
 wizardFireball.addEventListener('click', function () {
