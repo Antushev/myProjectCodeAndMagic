@@ -7,8 +7,8 @@ var wizardTemplate = document.querySelector('#similar-wizard-template')
 var similarList = document.querySelector('.setup-similar-list');
 
 var NUMBER_WIZARD = 4;
-var ESCAPE_KEY = 'Escape';
-var ENTER_KEY = 'Enter';
+
+var Buttons = {ESCAPE_KEY: 'Escape', ENTER_KEY: 'Enter'};
 
 var FIRST_NAMES = [
   'Иван',
@@ -111,6 +111,7 @@ document.querySelector('.setup-similar').classList.remove('hidden');
 var setupWindow = document.querySelector('.setup');
 var setupOpen = document.querySelector('.setup-open');
 var setupClose = document.querySelector('.setup-close');
+var inputName = document.querySelector('.setup-user-name');
 
 var openSetup = function () {
   setupWindow.classList.remove('hidden');
@@ -123,7 +124,7 @@ var closeSetup = function () {
 };
 
 var onSetupDownEscape = function (evt) {
-  if (evt.key === ESCAPE_KEY) {
+  if (evt.key === Buttons.ESCAPE_KEY && evt.target !== inputName) {
     closeSetup();
   }
 };
@@ -133,7 +134,7 @@ setupOpen.addEventListener('click', function () {
 });
 
 setupOpen.addEventListener('keydown', function (evt) {
-  if (evt.key === ENTER_KEY) {
+  if (evt.key === Buttons.ENTER_KEY) {
     openSetup();
   }
 });
@@ -143,7 +144,7 @@ setupClose.addEventListener('click', function () {
 });
 
 setupClose.addEventListener('keydown', function (evt) {
-  if (evt.key === ENTER_KEY) {
+  if (evt.key === Buttons.ENTER_KEY) {
     closeSetup();
   }
 });
