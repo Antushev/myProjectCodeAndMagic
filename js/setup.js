@@ -5,6 +5,9 @@
   var setupOpen = document.querySelector('.setup-open');
   var setupClose = document.querySelector('.setup-close');
   var inputName = document.querySelector('.setup-user-name');
+  var pictureUserInSetup = setupWindow.querySelector('.upload');
+  var START_COORD_X = setupWindow.style.left;
+  var START_COORD_Y = setupWindow.style.top;
 
   var openSetup = function () {
     setupWindow.classList.remove('hidden');
@@ -13,6 +16,8 @@
 
   var closeSetup = function () {
     setupWindow.classList.add('hidden');
+    setupWindow.style.left = START_COORD_X;
+    setupWindow.style.top = START_COORD_Y;
     document.removeEventListener('keydown', onSetupDownEscape);
   };
 
@@ -41,8 +46,6 @@
       closeSetup();
     }
   });
-
-  var pictureUserInSetup = setupWindow.querySelector('.upload');
 
   pictureUserInSetup.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
