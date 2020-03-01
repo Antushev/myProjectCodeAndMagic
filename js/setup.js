@@ -80,7 +80,7 @@
       if (dragged) {
         var onClickPreventDefault = function (clickEvt) {
           clickEvt.preventDefault();
-          setupWindow.removeEventListener('click', onClickPreventDefault)
+          setupWindow.removeEventListener('click', onClickPreventDefault);
         };
         setupWindow.addEventListener('click', onClickPreventDefault);
       }
