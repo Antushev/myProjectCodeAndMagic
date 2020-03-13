@@ -3,14 +3,15 @@
 (function () {
   var NUMBER_WIZARD = 4;
 
-  var wizards;
+  var errorBlock = document.querySelector('.error');
+  var errorText = errorBlock.querySelector('.error__text');
 
   var similarList = document.querySelector('.setup-similar-list');
 
   var renderWizards = function (wizardsInfo) {
     var fragment = document.createDocumentFragment();
 
-    for (var i = 0; i < wizardsInfo.length; i++) {
+    for (var i = 0; i < NUMBER_WIZARD; i++) {
       var wizardElement = window.wizard.renderWizard(wizardsInfo[i]);
       fragment.appendChild(wizardElement);
     }
@@ -18,24 +19,19 @@
     return fragment;
   };
 
-  var generateWizards = function () {
-    var listWizards = [];
+  var onLoad = function (data) {
+    errorBlock.classList.add('hidden');
 
-    for (var i = 0; i < NUMBER_WIZARD; i++) {
-      listWizards.push({
-        name: window.util.getRandomElementFromArray(window.characterWizard.FIRST_NAMES) + ' ' + window.util.getRandomElementFromArray(window.characterWizard.LAST_NAMES),
-        coatColor: window.util.getRandomElementFromArray(window.characterWizard.COAT_COLORS),
-        eyesColor: window.util.getRandomElementFromArray(window.characterWizard.EYES_COLORS)
-      });
-    }
-
-    return listWizards;
+    var fragmentWizards = renderWizards(data);
+    similarList.appendChild(fragmentWizards);
+    document.querySelector('.setup-similar').classList.remove('hidden');
   };
 
-  wizards = generateWizards();
+  var onError = function (textError) {
+    errorText.textContent = 'Во время згрузки списка волшебников произошла ошибка: ' + textError;
+    errorBlock.classList.remove('hidden');
+  };
 
-  similarList.appendChild(renderWizards(wizards));
-
-  document.querySelector('.setup-similar').classList.remove('hidden');
+  window.backend.load(onLoad, onError);
 })();
 

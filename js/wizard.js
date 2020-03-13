@@ -15,8 +15,8 @@
     var wizardElement = wizardTemplate.cloneNode(true);
 
     wizardElement.querySelector('.setup-similar-label').textContent = wizardInfo.name;
-    wizardElement.querySelector('.wizard-coat').style.fill = wizardInfo.coatColor;
-    wizardElement.querySelector('.wizard-eyes').style.fill = wizardInfo.eyesColor;
+    wizardElement.querySelector('.wizard-coat').style.fill = wizardInfo.colorCoat;
+    wizardElement.querySelector('.wizard-eyes').style.fill = wizardInfo.colorEyes;
 
     return wizardElement;
   };

@@ -2,10 +2,14 @@
 
 (function () {
   var setupWindow = document.querySelector('.setup');
+  var setupForm = setupWindow.querySelector('.setup-wizard-form');
   var setupOpen = document.querySelector('.setup-open');
-  var setupClose = document.querySelector('.setup-close');
+  var setupClose = setupWindow.querySelector('.setup-close');
+  var setupSend = setupWindow.querySelector('.setup-submit');
   var inputName = document.querySelector('.setup-user-name');
   var pictureUserInSetup = setupWindow.querySelector('.upload');
+  var errorBlock = document.querySelector('.error');
+  var errorText = document.querySelector('.error__text');
   var START_COORD_X = setupWindow.style.left;
   var START_COORD_Y = setupWindow.style.top;
 
@@ -92,5 +96,23 @@
     pictureUserInSetup.addEventListener('mousemove', onMouseMove);
     pictureUserInSetup.addEventListener('mouseup', onMouseUp);
   });
+
+  var onLoadSend = function () {
+    setupWindow.classList.add('hidden');
+    setupSend.textContent = 'Сохранить';
+  };
+
+  var onErrorSend = function (textError) {
+    errorText.textContent = textError;
+    errorBlock.classList.remove('hidden');
+  };
+
+  setupForm.addEventListener('submit', function (evt) {
+    evt.preventDefault();
+
+    setupSend.textContent = 'Отправка данных';
+    window.backend.save(new FormData(setupForm), onLoadSend, onErrorSend);
+  });
+
 })();
 
